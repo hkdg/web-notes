@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        
+
+        function objectFactory(){
+            var obj = new Object()
+            var constructor = Array.prototype.shift.call(arguments)
+            obj.__proto__ = constructor.prototype
+            var res = constructor.apply(obj,arguments)  
+            console.log(res,obj)
+            return typeof !!res&&res === 'object' ? res : obj
+        }
+
+        function fn(a,b){
+            this.a = a
+            this.b = b
+        }
+        fn.prototype.show= function(){
+            console.log(this.a,this.b)
+        }
+
+        var obj = objectFactory(fn,10,20)
+        console.log('obj',obj)
+
+    </script>
+</body>
+</html>

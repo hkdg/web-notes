@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.call1 = function (context) {
+            var context = context || window
+            context.fn = this
+            var arr = []
+            for (var a = 1; a < arguments.length; a++) {
+                arr.push('arguments['+ a +']')
+
+            }
+            // console.log('arr', arr)
+            
+            eval('context.fn('+arr+')')
+            delete context.fn
+        }
+        var obj = {
+            value: 'this is value'
+        }
+        function test(a, b) {
+            console.log(this.value, a, b)
+        }
+        test.call1(obj, 10, 'text')
+
+        
+        Function.prototype.apply1 = function (context,arg) {
+            var context = context || window
+            context.fn = this
+            var arr = []
+            for (var a = 0; a < arg.length; a++) {
+                arr.push('arg['+ a +']')
+
+            }
+            // console.log('arr', arr)
+            
+            eval('context.fn('+arr+')')
+            delete context.fn
+        }
+        var obj = {
+            value: 'this is value'
+        }
+        function test(a, b) {
+            console.log(this.value, a, b)
+        }
+        test.apply1(obj, [10, 'text'])
+    </script>
+</body>
+
+</html>
