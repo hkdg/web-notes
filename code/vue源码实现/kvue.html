@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app">
+        {{name}}
+        <p k-text="test"></p>
+        <p k-html="html"></p>
+        <input type="text" k-model="test">
+        <button @click="btnClick">点击事件</button>
+    </div>
+    <script src="compile.js"></script>
+    <script src="kvue.js"></script>
+    <script>      
+
+        var o = new Kvue({
+            el: "#app",
+            data: {
+                name: "双括号渲染",
+                test: "v-text渲染",
+                html: "<button>v-html渲染</button>"
+            },
+            methods:{
+                btnClick:function(){
+                    alert(this.test)
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>
